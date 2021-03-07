@@ -9,7 +9,7 @@
 
 @include('admin.includes.sidebar')
 
-@yield('content')		
+@yield ('content')	
 			
 			
 @include('admin.includes.script')

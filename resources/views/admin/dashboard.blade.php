@@ -1,5 +1,7 @@
 @extends('admin.includes.admin_design')
 
+@section('title') Admin Dashboard -  {{ config('app.name', 'Laravel') }} @endsection
+
 @section('content')
 <!-- Page Wrapper -->
 <div class="page-wrapper">
