@@ -77,10 +77,11 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="image">Profile Image </label>
-                            <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                            <input class="form-control" type="file" id="image" name="image" accept="image/*" onchange="readURL(this);">
                         </div>
+                        
 
-                        <img src="" style="width: 100px" id="one">
+                        <img src="{{asset('public/uploads/admin/' . $admin->image )}}" style="width: 100px" id="one">
                     </div>
 
                 </div>
@@ -96,5 +97,22 @@
 
 </div>
 <!-- /Page Wrapper -->
+
+@endsection
+
+@section('js')
+<script>
+  function readURL(input){
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#one')
+                .attr('src', e.target.result)
+                .width(100)
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 @endsection

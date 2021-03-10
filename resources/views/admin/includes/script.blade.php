@@ -15,6 +15,7 @@
 		
 		<!-- Custom JS -->
 		<script src="{{asset('/public/adminpanel/assets/js/app.js')}}"></script>
+		@yield('js')
 		
     </body>
 </html>
