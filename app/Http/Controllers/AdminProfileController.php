@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Intervention\Image\facades\Image;
@@ -63,7 +64,47 @@ class AdminProfileController extends Controller
         Session::flash('success_message', 'Admin profile has been updated succesfully');
         return redirect()->back();
 
-    
+        
     }
+     // Admin Password Update
+     public function changePassword(){
+        $user = Admin::where('email', Auth::guard('admin')->user()->email)->first();
+        return view ('admin.changePassword', compact('user'));
+
+    }
+
+         // Checking Current Password 
+    public function chkUserPassword(Request  $request){
+        $data = $request->all();
+        $current_password = $data['current_password'];
+        $user_id = Auth::guard('admin')->user()->id;
+        $check_password = Admin::where('id', $user_id)->first();
+        if(Hash::check($current_password, $check_password->password)){
+            return "true"; die;
+        } else {
+            return "false"; die;
+        }
+    }
+    // Change Admin Password
+    public function updatePassword(Request $request, $id){
+        $validateData = $request->validate([
+           'current_password' => 'required|max:255|min:6',
+           'password' => 'required|min:6',
+           'confirm_password' => 'required_with:password|same:password|min:6'
+        ]);
+        $user = Admin::where('email', Auth::guard('admin')->user()->email)->first();
+        $current_user_password = $user->password;
+        $data = $request->all();
+        if(Hash::check($data['current_password'], $current_user_password)){
+            $user->password = bcrypt($data['password']);
+            $user->save();
+            Session::flash('success_message', 'Admin Password Has Been Updated Successfully');
+            return redirect()->back();
+        } else {
+            Session::flash('error_message', 'Your Current Password Does not Match with our database');
+            return redirect()->back();
+        }
+    }
+
        
 }
