@@ -20,6 +20,10 @@
 		
 		<!-- Lineawesome CSS -->
         <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/line-awesome.min.css')}}">
+        
+        <!-- Datatable CSS -->
+    <link rel="stylesheet" href="{{ asset('public/adminpanel/assets/css/dataTables.bootstrap4.min.css') }}">
+
 		
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="{{asset('public/adminpanel/assets/plugins/morris/morris.css')}}">

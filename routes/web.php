@@ -35,6 +35,15 @@ Route::prefix('/admin')->group(function(){
         // Update Admin Password
          Route::post('/profile/update_password/{id}', 'AdminProfileController@updatePassword')->name('updatePassword');
 
+         
+         //category routes
+         Route::get('/category', 'CategoryController@category')->name('category.index');
+         Route::get('/category/add', 'CategoryController@addCategory')->name('addCategory');
+         Route::post('/category/add', 'CategoryController@storeCategory')->name('storeCategory');
+
+
+
+
 
     });
 });

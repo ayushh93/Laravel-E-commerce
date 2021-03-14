@@ -7,6 +7,10 @@
 								<a href="{{ROUTE('adminDashboard')}}"><i class="la la-dashboard"></i> <span> Dashboard</span> 
 								</a>
 							</li>
+							<li >
+								<a href="{{ROUTE('category.index')}}"><i class="la la-list-alt"></i> <span> Category</span> 
+								</a>
+							</li>
 							
 							
 						</ul>
