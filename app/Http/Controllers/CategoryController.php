@@ -14,13 +14,18 @@ class CategoryController extends Controller
     //category index
     public function category()
     {
-        return view('admin.category.index');
+        $categories = Category::latest()->get();
+
+        return view('admin.category.index', compact('categories'));
     }
 
     //add category
     public function addCategory()
     {
-        return view ('admin.category.add');
+        $categories = Category::where('parent_id', 0)->orderBy('category_name','ASC')->get();
+
+        return view ('admin.category.add',compact('categories'));
+
     }
 
     //store category

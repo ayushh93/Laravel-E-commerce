@@ -38,21 +38,55 @@
 										<table class="datatable table table-stripped mb-0">
 											<thead>
 												<tr>
-													<th>Name</th>
-													<th>Position</th>
-													<th>Office</th>
-													<th>Age</th>
-													<th>Salary</th>
+													<th>SN</th>
+													<th>Category image</th>
+													<th>Category Name</th>
+													<th>Category Code</th>
+													<th>Main Category</th>
+													<th>status</th>
+													<th>Actions</th>
 												</tr>
 											</thead>
 											<tbody>
-                                            <tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>61</td>
-													<td>$320,800</td>
+											@foreach ($categories as $category)
+                                            	<tr>
+													<td>{{$loop->index+1}}</td>
+													<td>@if(!empty($category->image))
+                                               <img src="{{ asset('public/uploads/category/'.$category->image) }}" width="50px">
+                                           @else
+                                               <img src="{{ asset('public/uploads/default/noimg.png') }}" width="50px">
+                                           @endif
+											</td>
+													<td>{{ $category->category_name }}</td>
+                                       				<td>{{ $category->category_code }}</td>
+                                       				<td> @if($category->parent_id == 0)
+                                               Main Category
+                                           @else
+                                               {{ $category->subCategory->category_name }}
+                                           @endif
+											</td>
+                                       				<td> @if($category->status == 1)
+                                               <span class="badge bg-success" style="color: white;">Active</span>
+                                           @else
+                                               <span class="badge bg-danger" style="color: white;">In Active</span>
+                                           @endif
+											</td>
+
+													<td> <button class="btn btn-info btn-sm" data-toggle="modal" data-target="">
+                                               <i class="fa fa-eye"></i>
+
+                                           </button>
+                                           <a href="">
+                                           <button class="btn btn-success btn-sm">
+                                               <i class="fa fa-pencil"></i>
+                                           </button>
+                                           </a>
+                                           <a class="btn btn-danger btn-sm deleteRecord" style="color: white" href="javascript:" rel="" rel1="">
+                                               <i class="fa fa-trash"></i>
+                                           </a>
+											</td>
 												</tr>
+												@endforeach
                                             </tbody>
 										</table>
 									</div>
