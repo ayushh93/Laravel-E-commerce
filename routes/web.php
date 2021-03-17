@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::prefix('/admin')->group(function(){
     //admin login
     Route::match(['get', 'post'], '/login', 'AdminLoginController@adminLogin')->name('adminLogin');
-    
+
     Route::group(['middleware' => ['admin']], function(){
         //admin dashboard
         Route::get('/dashboard', 'AdminLoginController@dashboard')->name('adminDashboard');
@@ -35,15 +35,13 @@ Route::prefix('/admin')->group(function(){
         // Update Admin Password
          Route::post('/profile/update_password/{id}', 'AdminProfileController@updatePassword')->name('updatePassword');
 
-         
+
          //category routes
          Route::get('/category', 'CategoryController@category')->name('category.index');
          Route::get('/category/add', 'CategoryController@addCategory')->name('addCategory');
          Route::post('/category/add', 'CategoryController@storeCategory')->name('storeCategory');
-
-
-
-
+        Route::get('/category/edit/{id}', 'CategoryController@editCategory')->name('editCategory');
+        Route::post('/category/edit/{id}', 'CategoryController@updateCategory')->name('updateCategory');
 
     });
 });
