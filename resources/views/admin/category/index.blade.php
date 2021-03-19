@@ -81,7 +81,7 @@
                                                <i class="fa fa-pencil"></i>
                                            </button>
                                            </a>
-                                           <a class="btn btn-danger btn-sm deleteRecord" style="color: white" href="javascript:" rel="" rel1="">
+                                           <a class="btn btn-danger btn-sm deleteRecord" style="color: white" href="javascript:" rel="{{$category->id}}" rel1="delete-category">
                                                <i class="fa fa-trash"></i>
                                            </a>
 											</td>
@@ -153,5 +153,26 @@
     <!-- Datatable JS -->
     <script src="{{ asset('public/adminpanel/assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('public/adminpanel/assets/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script>
+        $(".deleteRecord").click(function () {
+            var SITEURL = '{{ URL::to('') }}';
+            var id = $(this).attr('rel');
+            var deleteFunction = $(this).attr('rel1');
+            swal({
+                    title: "Are You Sure? ",
+                    text: "You will not be able to recover this record again",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes, Delete it!"
+                },
+                function () {
+                    window.location.href = SITEURL + "/admin/" + deleteFunction + "/" + id;
+                });
+        });
+
+    </script>
+
+
 
 @endsection

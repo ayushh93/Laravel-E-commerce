@@ -42,7 +42,7 @@ Route::prefix('/admin')->group(function(){
          Route::post('/category/add', 'CategoryController@storeCategory')->name('storeCategory');
         Route::get('/category/edit/{id}', 'CategoryController@editCategory')->name('editCategory');
         Route::post('/category/edit/{id}', 'CategoryController@updateCategory')->name('updateCategory');
-
+        Route::get('/delete-category/{id}','CategoryController@deleteCategory')->name('deleteCategory');
     });
 });
 

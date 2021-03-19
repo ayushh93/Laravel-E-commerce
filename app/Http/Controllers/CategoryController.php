@@ -36,13 +36,14 @@ class CategoryController extends Controller
             'category_name' => 'required|max:255',
             'category_code' => 'required|min:6',
          ]);
-         $category = new Category();
-         $category->category_name = ucwords(strtolower($data['category_name']));
-         $category->category_code =$data['category_code'];
-         $category->slug = str::slug($data['category_name']);
-         $category->parent_id = $data['parent_id'];
+        $category = new Category();
+        $category->category_name = ucwords(strtolower($data['category_name']));
+        $category->category_code = $data['category_code'];
+        $category->slug = Str::slug($data['category_name']);
+        $category->parent_id = $data['parent_id'];
 
-         if(empty($data['description']))
+
+        if(empty($data['description']))
          {
              $category->description="";
          }
@@ -76,6 +77,7 @@ class CategoryController extends Controller
     //edit category
     public function editCategory($id)
     {
+        Session::put('admin_page', 'category');
         $myCategory = Category::findorfail($id);
         $categories = Category::where('parent_id', 0)->orderBy('category_name','ASC')->get();
         return view ('admin.category.edit',compact('categories', 'myCategory'));
@@ -121,9 +123,34 @@ class CategoryController extends Controller
                 $category->image = $filename;
             }
         }
+        $image_path = 'public/uploads/category/';
+        if(!empty($data['image'])){
+            if(file_exists($image_path.$data['current_image'])){
+                unlink($image_path.$data['current_image']);
+            }
+        }
+
         $category->save();
         Session::flash('success_message', 'Category Has Been updated Successfully');
         return redirect()->back();
+    }
+    //delete category
+    public function deleteCategory($id)
+    {
+        $category = Category::findorFail($id);
+        $category->delete();
+        DB::table('categories')->where('parent_id',$id)->delete();
+        //delete image
+        $image_path = 'public/uploads/category/';
+
+        if(!empty($category->image)){
+            if(file_exists($image_path.$category->image)){
+                unlink($image_path.$category->image);
+            }
+        }
+        Session::flash('success_message', 'Category Has Been deleted Successfully');
+        return redirect()->back();
+
     }
 
 

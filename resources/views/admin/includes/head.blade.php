@@ -8,30 +8,33 @@
         <meta name="robots" content="noindex, nofollow">
         <meta name="csrf-token" content="{{csrf_token()}}">
         <title>@yield('title')</title>
-		
+
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-		
+
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/bootstrap.min.css')}}">
-		
+
 		<!-- Fontawesome CSS -->
         <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/font-awesome.min.css')}}">
-		
+
 		<!-- Lineawesome CSS -->
         <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/line-awesome.min.css')}}">
-        
+
         <!-- Datatable CSS -->
     <link rel="stylesheet" href="{{ asset('public/adminpanel/assets/css/dataTables.bootstrap4.min.css') }}">
 
-		
+
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="{{asset('public/adminpanel/assets/plugins/morris/morris.css')}}">
-		
+
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/style.css')}}">
-		
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--sweetalert css-->
+        <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/sweetalert.css')}}">
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
