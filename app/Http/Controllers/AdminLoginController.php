@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdminLoginController extends Controller
 {
@@ -32,5 +34,32 @@ class AdminLoginController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect('/admin/login');
+    }
+
+    //forget password
+    public function forgetPassword(Request $request)
+    {
+        if($request->isMethod('post'))
+        {
+            $data = $request->all();
+            $validateData = $request->validate([
+                'email' => 'required'
+            ]);
+            $adminCount = Admin::where('email', $data['email'])->count();
+            if($adminCount == 0)
+            {
+                return redirect()->back()->with('error_message','User doesnt exist in our database');
+            }
+            //get admin details
+            $adminDetails = Admin::where('email', $data['email'])->first();
+            //generate password
+            $random_password = Str::random(10);
+            //encode password
+            $new_password = bcrypt($random_password);
+            //update password
+            Admin::where('email', $data['email'])->update(['password' => $new_password]);
+
+        }
+        return view("admin.auth.forget");
     }
 }
