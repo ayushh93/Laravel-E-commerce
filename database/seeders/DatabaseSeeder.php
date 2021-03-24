@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Theme;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'phone' => "9843700444",
             'role_id' =>1,
             'status' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        Theme::insert([
+            'site_title'=> "Hamro Shop",
+            'site_subtitle' => "The best e-commerce in town",
             'created_at' => now(),
             'updated_at' => now()
         ]);
