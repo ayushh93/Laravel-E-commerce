@@ -9,7 +9,7 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col">
-								<h3 class="page-title">Data Tables</h3>
+								<h3 class="page-title">All Categories</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="{{ route('adminDashboard') }}">Dashboard</a></li>
 									<li class="breadcrumb-item active">All Categories</li>
@@ -27,10 +27,7 @@
 						<div class="col-sm-12">
 							<div class="card mb-0">
 								<div class="card-header">
-									<h4 class="card-title mb-0">Default Datatable</h4>
-									<p class="card-text">
-										This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
-									</p>
+                                    <H4> Categories</H4>
 								</div>
 								<div class="card-body">
 
@@ -65,12 +62,14 @@
                                                {{ $category->subCategory->category_name }}
                                            @endif
 											</td>
-                                       				<td> @if($category->status == 1)
-                                               <span class="badge bg-success" style="color: white;">Active</span>
-                                           @else
-                                               <span class="badge bg-danger" style="color: white;">In Active</span>
-                                           @endif
-											</td>
+                                       				<td>  @if($category->status == 1)
+
+                                                            <a class="text-success updateCategoryStatus" style="color: white;" href="javascript:" id="category-{{$category->id}}" category_id="{{ $category->id }}">Active</a>
+                                                        @else
+                                                            <a class="text-danger updateCategoryStatus" style="color: white;" href="javascript:" id="category-{{$category->id}}" category_id="{{ $category->id }}">In Active</a>
+                                                        @endif
+
+                                                    </td>
 
 													<td> <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#view_category{{$category->id}}">
                                                <i class="fa fa-eye"></i>
@@ -172,6 +171,29 @@
         });
 
     </script>
+
+    <script>
+        $(".updateCategoryStatus").click(function (){
+            var status = $(this).text();
+            var category_id = $(this).attr("category_id");
+            $.ajax({
+                type: 'post',
+                url: '{{ route('updateCategoryStatus') }}',
+                data: {status:status, category_id:category_id},
+                success: function (resp){
+                    if(resp['status'] == 0){
+                        $("#category-"+category_id).html(' <a class="text-danger updateCategoryStatus" style="color: white;" href="javascript:" id="category-{{$category->id}}" category_id="{{ $category->id }}">In Active</a>');
+                    } else {
+                        $("#category-"+category_id).html(' <a class="text-success updateCategoryStatus" style="color: white;" href="javascript:" id="category-{{$category->id}}" category_id="{{ $category->id }}">Active</a>');
+
+                    }
+                }, error: function (){
+                    alert("Error");
+                }
+            });
+        });
+    </script>
+
 
 
 

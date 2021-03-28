@@ -45,6 +45,7 @@ Route::prefix('/admin')->group(function(){
         Route::get('/delete-category/{id}','CategoryController@deleteCategory')->name('deleteCategory');
         Route::get('/theme','ThemeController@theme')->name('theme');
         Route::post('/theme/{id}','ThemeController@themeUpdate')->name('themeUpdate');
+        Route::post('/update-category-status','CategoryController@updateCategoryStatus')->name('updateCategoryStatus');
     });
 });
 
