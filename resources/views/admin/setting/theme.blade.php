@@ -1,4 +1,4 @@
-@extends('admin.includes.admin_design')
+@extends('admin.includes.admin_design_v2')
 
 @section('title') Theme Settings -  {{ config('app.name', 'Laravel') }} @endsection
 

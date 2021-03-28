@@ -14,6 +14,8 @@ class CategoryController extends Controller
     //category index
     public function category()
     {
+        Session::put('admin_page','category');
+
         $categories = Category::latest()->get();
 
         return view('admin.category.index', compact('categories'));
@@ -22,8 +24,8 @@ class CategoryController extends Controller
     //add category
     public function addCategory()
     {
+        Session::put('admin_page','category');
         $categories = Category::where('parent_id', 0)->orderBy('category_name','ASC')->get();
-
         return view ('admin.category.add',compact('categories'));
 
     }

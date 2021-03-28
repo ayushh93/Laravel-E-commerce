@@ -14,6 +14,8 @@ class ThemeController extends Controller
     //theme
     public function theme()
     {
+        Session::put('admin_page','theme');
+
         $theme=Theme::first();
         return view('admin.setting.theme',compact('theme'));
 
@@ -58,3 +60,4 @@ class ThemeController extends Controller
         return redirect()->back();
     }
 }
+

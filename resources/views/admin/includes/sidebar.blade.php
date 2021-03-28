@@ -3,16 +3,35 @@
                 <div class="sidebar-inner slimscroll">
 					<div id="sidebar-menu" class="sidebar-menu">
 						<ul>
-						<li >
-								<a href="{{ROUTE('adminDashboard')}}"><i class="la la-dashboard"></i> <span> Dashboard</span>
+                            @if(Session::get('admin_page') == 'dashboard')
+                            @php $active = "active" @endphp
+                            @else
+                                @php $active = "" @endphp
+                            @endif
+
+
+                                <li class="{{$active}}">
+								<a  href="{{ROUTE('adminDashboard')}}"><i class="la la-dashboard"></i> <span> Dashboard</span>
 								</a>
 							</li>
-							<li >
-								<a href="{{ROUTE('category.index')}}"><i class="la la-list-alt"></i> <span> Category</span>
+                                @if(Session::get('admin_page') == 'category')
+                                    @php $active = "active" @endphp
+                                @else
+                                    @php $active = "" @endphp
+                                @endif
+
+							<li class="{{$active}}">
+								<a  href="{{ROUTE('category.index')}}"><i class="la la-list-alt"></i> <span> Category</span>
 								</a>
 							</li>
-                            <li >
-                                <a href="{{ROUTE('theme')}}"><i class="la la-cogs"></i> <span> Theme settings</span>
+                                @if(Session::get('admin_page') == 'theme')
+                                    @php $active = "active" @endphp
+                                @else
+                                    @php $active = "" @endphp
+                                @endif
+
+                            <li class="{{$active}}">
+                                <a  href="{{ROUTE('theme')}}"><i class="la la-cogs"></i> <span> Theme settings</span>
                                 </a>
                             </li>
 

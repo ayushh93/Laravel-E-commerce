@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e21d9847-235f-4e7c-90f1-d93453a9c9df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/setting/theme.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/email/forgetpassword.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/includes/admin_design_v2.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/includes/sidebar_v2.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminLoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ThemeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ThemeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/changePassword.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/changePassword.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/setting/theme.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/setting/theme.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,9 +152,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/includes" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\xampp\htdocs\hamroshop\resources\views\admin\includes" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -174,7 +182,9 @@
       <workItem from="1616509836727" duration="273000" />
       <workItem from="1616511317748" duration="2929000" />
       <workItem from="1616558605370" duration="3872000" />
-      <workItem from="1616591727051" duration="4275000" />
+      <workItem from="1616591727051" duration="4970000" />
+      <workItem from="1616926680331" duration="302000" />
+      <workItem from="1616931143440" duration="2795000" />
     </task>
     <servers />
   </component>
@@ -186,19 +196,19 @@
       <screen x="1366" y="0" width="1366" height="738" />
     </state>
     <state x="1779" y="124" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.738/1366.0.1366.738@1366.0.1366.738" timestamp="1616600627886" />
-    <state x="1883" y="292" key="NewPhpFileDialog" timestamp="1616598746451">
-      <screen x="1366" y="0" width="1366" height="738" />
+    <state x="517" y="292" key="NewPhpFileDialog" timestamp="1616934863804">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="517" y="292" key="NewPhpFileDialog/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1615994239848" />
+    <state x="517" y="292" key="NewPhpFileDialog/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1616934863804" />
     <state x="1883" y="292" key="NewPhpFileDialog/0.0.1366.738/1366.0.1366.738@1366.0.1366.738" timestamp="1616598746451" />
     <state x="184" y="14" key="SettingsEditor" timestamp="1615993856010">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="184" y="14" key="SettingsEditor/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1615993856010" />
-    <state x="1712" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1616560519539">
-      <screen x="1366" y="0" width="1366" height="738" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1616934030007">
+      <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1615992190606" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1366.738@0.0.1366.738" timestamp="1616934030007" />
     <state x="1712" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1366.738@1366.0.1366.738" timestamp="1616560519539" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1616559133132" />
   </component>

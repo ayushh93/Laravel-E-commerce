@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AdminLoginController extends Controller
@@ -28,6 +29,7 @@ class AdminLoginController extends Controller
 
     //admin dashboard
     public function dashboard(){
+        Session::put('admin_page','dashboard');
      return view("admin.dashboard");
     }
     //admin logout

@@ -64,16 +64,18 @@ class AdminProfileController extends Controller
         Session::flash('success_message', 'Admin profile has been updated succesfully');
         return redirect()->back();
 
-        
+
     }
      // Admin Password Update
      public function changePassword(){
-        $user = Admin::where('email', Auth::guard('admin')->user()->email)->first();
+         Session::put('admin_page','password');
+
+         $user = Admin::where('email', Auth::guard('admin')->user()->email)->first();
         return view ('admin.changePassword', compact('user'));
 
     }
 
-         // Checking Current Password 
+         // Checking Current Password
     public function chkUserPassword(Request  $request){
         $data = $request->all();
         $current_password = $data['current_password'];
@@ -106,5 +108,5 @@ class AdminProfileController extends Controller
         }
     }
 
-       
+
 }
