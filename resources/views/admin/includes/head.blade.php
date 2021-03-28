@@ -10,7 +10,7 @@
         <title>@yield('title')</title>
 
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/uploads/'.$theme->favicon) }}">
 
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{{asset('public/adminpanel/assets/css/bootstrap.min.css')}}">

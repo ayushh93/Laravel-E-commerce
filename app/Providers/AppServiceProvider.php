@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['admin.*'],function($view){
             $view->with('theme',Theme::first());
         });
+        View::composer(['front.*'],function($view){
+            $view->with('theme',Theme::first());
+        });
     }
 
     /**
