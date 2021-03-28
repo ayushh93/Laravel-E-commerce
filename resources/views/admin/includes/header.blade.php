@@ -1,14 +1,14 @@
 <!-- Header -->
 <div class="header">
-			
+
             <!-- Logo -->
-            <div class="header-left">
+            <div class="header-left" style="    background-color: white; ">
                 <a href="{{route('adminDashboard')}}" class="logo">
-                    <img src="{{asset('/public/adminpanel/assets/img/logo.png')}}" width="40" height="40" alt="">
+                    <img src="{{asset('/public/uploads/'. $theme->logo)}}" width="130" height="50" alt="">
                 </a>
             </div>
             <!-- /Logo -->
-            
+
             <a id="toggle_btn" href="javascript:void(0);">
                 <span class="bar-icon">
                     <span></span>
@@ -16,22 +16,22 @@
                     <span></span>
                 </span>
             </a>
-            
+
             <!-- Header Title -->
             <div class="page-title-box">
-                <h3>Dreamguy's Technologies</h3>
+                <h3>{{$theme->site_title}}</h3>
             </div>
             <!-- /Header Title -->
-            
+
             <a id="mobile_btn" class="mobile_btn" href="index.html#sidebar"><i class="fa fa-bars"></i></a>
-            
+
             <!-- Header Menu -->
             <ul class="nav user-menu">
             @php
            $current_user = Auth::guard('admin')->user();
         @endphp
 
-                
+
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="index.html#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img"><img src="{{asset('public/uploads/admin/'.$current_user->image)}}" alt="">
@@ -46,7 +46,7 @@
                 </li>
             </ul>
             <!-- /Header Menu -->
-            
+
             <!-- Mobile Menu -->
             <div class="dropdown mobile-user-menu">
                 <a href="index.html#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -57,6 +57,6 @@
                 </div>
             </div>
             <!-- /Mobile Menu -->
-            
+
         </div>
         <!-- /Header -->
