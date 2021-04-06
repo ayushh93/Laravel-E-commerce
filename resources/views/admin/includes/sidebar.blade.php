@@ -34,6 +34,16 @@
                                 <a  href="{{ROUTE('theme')}}"><i class="la la-cogs"></i> <span> Theme settings</span>
                                 </a>
                             </li>
+                                @if(Session::get('admin_page') == 'Product')
+                                    @php $active = "active" @endphp
+                                @else
+                                    @php $active = "" @endphp
+                                @endif
+
+                                <li class="{{$active}}">
+                                    <a  href="{{ROUTE('product.index')}}"><i class="la la-cogs"></i> <span> Products</span>
+                                    </a>
+                                </li>
 
 
 

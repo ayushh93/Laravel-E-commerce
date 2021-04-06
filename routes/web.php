@@ -41,12 +41,21 @@ Route::prefix('/admin')->group(function(){
         Route::get('/category/edit/{id}', 'CategoryController@editCategory')->name('editCategory');
         Route::post('/category/edit/{id}', 'CategoryController@updateCategory')->name('updateCategory');
         Route::get('/delete-category/{id}','CategoryController@deleteCategory')->name('deleteCategory');
+        Route::post('/update-category-status','CategoryController@updateCategoryStatus')->name('updateCategoryStatus');
+
+        //theme settings
         Route::get('/theme','ThemeController@theme')->name('theme');
         Route::post('/theme/{id}','ThemeController@themeUpdate')->name('themeUpdate');
-        Route::post('/update-category-status','CategoryController@updateCategoryStatus')->name('updateCategoryStatus');
+
+        //product
+        Route::get('/product','ProductsController@product')->name('product.index');
+        Route::get('/product/add', 'ProductsController@addProduct')->name('addProduct');
+        Route::post('/product/store','ProductsController@storeProduct')->name('storeProduct');
+
+
     });
 });
-
+Route::post('/ckeditor','CkeditorFileUploadController@store')->name('ckeditor.upload');
 Route::get('/admin/logout', 'AdminLoginController@adminLogout' )->name('adminLogout');
 Route::match(['get','post'], '/forget-password','AdminLoginController@forgetPassword')->name('forgetPassword');
 
