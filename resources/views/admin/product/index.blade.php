@@ -36,16 +36,55 @@
                                     <thead>
                                     <tr>
                                         <th>SN</th>
-                                        <th>Category image</th>
-                                        <th>Category Name</th>
-                                        <th>Category Code</th>
-                                        <th>Main Category</th>
-                                        <th>status</th>
+                                        <th>Product Image</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($products as $product)
+                                        <tr>
+                                            <td>{{$loop->index + 1}}</td>
+                                            <td>
+                                                @if(!empty($product->image))
+                                                    <img src="{{ asset('public/uploads/product/'.$product->image) }}" width="50px">
+                                                @else
+                                                    <img src="{{ asset('public/uploads/default/cat_image.png') }}" width="50px">
+                                                @endif
 
+                                            </td>
+                                            <td>{{ $product->product_name }}</td>
+                                            <td>{{ $product->price }}</td>
+                                            <td>{{ $product->category->category_name }}</td>
+                                            <td>
+                                                @if($product->status == 1)
+                                                    <a class="text-success updateProductStatus" style="color: white;" href="javascript:" id="product-{{$product->id}}" product_id="{{ $product->id }}">Active</a>
+                                                @else
+                                                    <a class="text-danger updateProductStatus" style="color: white;" href="javascript:" id="product-{{$product->id}}" product_id="{{ $product->id }}">In Active</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="" class="btn btn-info btn-sm">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                                <a href="">
+                                                    <button class="btn btn-success btn-sm">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </button>
+                                                </a>
+                                                <a class="btn btn-danger btn-sm deleteRecord" style="color: white" href="javascript:" rel="{{ $product->id }}" rel1="delete-product">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+
+
+
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

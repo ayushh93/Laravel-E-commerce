@@ -15,7 +15,8 @@ class ProductsController extends Controller
     public function product()
     {
         Session::put('admin_page','Product');
-        return view('admin.product.index');
+        $products = Product::with('category')->latest()->get();
+        return view('admin.product.index',compact('products'));
     }
 
     //add product
