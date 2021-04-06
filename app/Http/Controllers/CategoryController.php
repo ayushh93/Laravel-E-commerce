@@ -85,35 +85,29 @@ class CategoryController extends Controller
         return view ('admin.category.edit',compact('categories', 'myCategory'));
 
     }
-    //update category
-    public function updateCategory(Request $request, $id)
-    {
-        $data=$request->all();
+    // Update Category
+    public function updateCategory(Request $request, $id){
+        $data = $request->all();
         $validateData = $request->validate([
             'category_name' => 'required|max:255',
             'category_code' => 'required|min:6',
         ]);
-        $category = Category::findorfail($id);
+        $category = Category::findOrFail($id);
         $category->category_name = ucwords(strtolower($data['category_name']));
-        $category->category_code =$data['category_code'];
-        $category->slug = str::slug($data['category_name']);
+        $category->category_code = $data['category_code'];
+        $category->slug = Str::slug($data['category_name']);
         $category->parent_id = $data['parent_id'];
-
-        if(empty($data['description']))
-        {
-            $category->description="";
-        }
-        else{
+        if(empty($data['description'])){
+            $category->description = "";
+        } else {
             $category->description = $data['description'];
         }
-        if (empty($data['status']))
-        {
+        if (empty($data['status'])){
             $category->status = 0;
-        }
-        else
-        {
+        } else {
             $category->status = 1;
         }
+
         $random = Str::random(10);
         if($request->hasFile('image')){
             $image_tmp = $request->file('image');
@@ -125,23 +119,31 @@ class CategoryController extends Controller
                 $category->image = $filename;
             }
         }
+
+
         $image_path = 'public/uploads/category/';
-        if(!empty($data['image'])){
-            if(file_exists($image_path.$data['current_image'])){
-                unlink($image_path.$data['current_image']);
+        if(!empty($data['image'])) {
+            if (file_exists($image_path . $data['current_image']))
+            {
+                unlink($image_path . $data['current_image']);
             }
         }
 
+
         $category->save();
-        Session::flash('success_message', 'Category Has Been updated Successfully');
+        Session::flash('success_message', 'Category Has Been Updated Successfully');
         return redirect()->back();
     }
+
     //delete category
     public function deleteCategory($id)
     {
         $category = Category::findorFail($id);
         $category->delete();
+        //if main category deletes subcategory also deletes
         DB::table('categories')->where('parent_id',$id)->delete();
+        //product belonging to category also deletes
+        DB::table('products')->where('category_id',$id)->delete();
         //delete image
         $image_path = 'public/uploads/category/';
 

@@ -22,6 +22,7 @@
                 </div>
             </div>
             <!-- /Page Header -->
+            @include('admin.includes._message')
 
             <div class="row">
                 <div class="col-sm-12">
@@ -53,13 +54,13 @@
                                                 @if(!empty($product->image))
                                                     <img src="{{ asset('public/uploads/product/'.$product->image) }}" width="50px">
                                                 @else
-                                                    <img src="{{ asset('public/uploads/default/cat_image.png') }}" width="50px">
+                                                    <img src="{{ asset('public/uploads/default/noimg.png') }}" width="50px">
                                                 @endif
 
                                             </td>
                                             <td>{{ $product->product_name }}</td>
                                             <td>{{ $product->price }}</td>
-                                            <td>{{ $product->category->category_name }}</td>
+                                            <td>{{ $product->category->category_name  }}</td>
                                             <td>
                                                 @if($product->status == 1)
                                                     <a class="text-success updateProductStatus" style="color: white;" href="javascript:" id="product-{{$product->id}}" product_id="{{ $product->id }}">Active</a>
@@ -71,7 +72,7 @@
                                                 <a href="" class="btn btn-info btn-sm">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
-                                                <a href="">
+                                                <a href="{{route('editProduct',  $product->id)}}">
                                                     <button class="btn btn-success btn-sm">
                                                         <i class="fa fa-pencil"></i>
                                                     </button>

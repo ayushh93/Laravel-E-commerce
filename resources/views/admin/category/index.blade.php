@@ -22,6 +22,7 @@
 						</div>
 					</div>
 					<!-- /Page Header -->
+                    @include('admin.includes._message')
 
 					<div class="row">
 						<div class="col-sm-12">

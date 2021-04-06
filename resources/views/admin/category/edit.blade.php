@@ -27,7 +27,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('storeCategory')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('updateCategory',$myCategory->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -63,10 +63,11 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="image">Profile Image </label>
+                                                <input type="hidden" name="current_image" value="{{ $myCategory->image }}">
                                                 <input class="form-control" type="file" id="image" name="image" accept="image/*" onchange="readURL(this);">
                                             </div>
-                                            @if(!empty($category->image))
-                                                <img src="{{ asset('public/uploads/category/'.$category->image) }}" width="80px" id="one">
+                                            @if(!empty($myCategory->image))
+                                                <img src="{{ asset('public/uploads/category/'.$myCategory->image) }}" width="80px" id="one">
                                             @else
                                                 <img src="{{ asset('public/uploads/default/noimg.png') }}" width="80px" id="one">
                                             @endif
