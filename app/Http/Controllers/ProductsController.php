@@ -42,6 +42,8 @@ class ProductsController extends Controller
         $data=$request->all();
         $validateData = $request->validate([
             'product_name' => 'required|max:255',
+            'description' => 'required',
+            'excerpt' => 'required',
             'price' => 'required|numeric|gt:0',
         ]);
         $product=new Product();
@@ -128,6 +130,8 @@ class ProductsController extends Controller
         $validateData = $request->validate([
             'product_name' => 'required|max:255',
             'price' => 'required|numeric|gt:0',
+            'description' => 'required',
+            'excerpt' => 'required',
             'category_id'=> 'required'
         ]);
         $product->product_name = $data['product_name'];
@@ -201,5 +205,18 @@ class ProductsController extends Controller
         }
         Session::flash('success_message', 'Product Has Been deleted Successfully');
         return redirect()->back();
+    }
+    //update product status
+    public function updateProductStatus(Request  $request){
+        if($request->ajax()){
+            $data = $request->all();
+            if($data['status'] == 'Active'){
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+            Product::where('id', $data['product_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status, 'product_id' => $data['product_id']]);
+        }
     }
 }

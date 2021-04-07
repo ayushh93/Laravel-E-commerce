@@ -37,6 +37,7 @@ class CategoryController extends Controller
         $validateData = $request->validate([
             'category_name' => 'required|max:255',
             'category_code' => 'required|min:6',
+            'category_id' => 'required',
          ]);
         $category = new Category();
         $category->category_name = ucwords(strtolower($data['category_name']));
@@ -91,6 +92,8 @@ class CategoryController extends Controller
         $validateData = $request->validate([
             'category_name' => 'required|max:255',
             'category_code' => 'required|min:6',
+            'category_id' => 'required',
+
         ]);
         $category = Category::findOrFail($id);
         $category->category_name = ucwords(strtolower($data['category_name']));

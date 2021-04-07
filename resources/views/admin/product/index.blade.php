@@ -123,6 +123,27 @@
         });
 
     </script>
+    <script>
+        $(".updateProductStatus").click(function (){
+            var status = $(this).text();
+            var product_id = $(this).attr("product_id");
+            $.ajax({
+                type: 'post',
+                url: '{{ route('updateProductStatus') }}',
+                data: {status:status, product_id:product_id},
+                success: function (resp){
+                    if(resp['status'] == 0){
+                        $("#product-"+product_id).html(' <a class="text-danger updateProductStatus" style="color: white;" href="javascript:" id="product-{{$product->id}}" product_id="{{ $product->id }}">In Active</a>');
+                    } else {
+                        $("#product-"+product_id).html(' <a class="text-success updateProductStatus" style="color: white;" href="javascript:" id="product-{{$product->id}}" product_id="{{ $product->id }}">Active</a>');
+
+                    }
+                }, error: function (){
+                    alert("Error");
+                }
+            });
+        });
+    </script>
 
 
 
