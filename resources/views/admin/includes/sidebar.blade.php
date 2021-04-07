@@ -41,7 +41,7 @@
                                 @endif
 
                                 <li class="{{$active}}">
-                                    <a  href="{{ROUTE('product.index')}}"><i class="la la-cogs"></i> <span> Products</span>
+                                    <a  href="{{ROUTE('product.index')}}"><i class="la la-shopping-cart"></i> <span> Products</span>
                                     </a>
                                 </li>
 

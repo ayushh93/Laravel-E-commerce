@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\ProductAttribute;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -218,5 +219,37 @@ class ProductsController extends Controller
             Product::where('id', $data['product_id'])->update(['status' => $status]);
             return response()->json(['status' => $status, 'product_id' => $data['product_id']]);
         }
+    }
+
+    public function addAttributes(Request $request, $id)
+    {
+        $product = Product::findorFail($id);
+        if($request->isMethod('post')){
+            $data = $request->all();
+
+            foreach($data['sku'] as $key => $val){
+                if(!empty($val)){
+                    $attribute = new ProductAttribute();
+                    $attribute->product_id = $data['product_id'];
+                    $attribute->sku = $val;
+                    $attribute->size = $data['size'][$key];
+                    $attribute->price = $data['price'][$key];
+                    $attribute->stock = $data['stock'][$key];
+                    $attribute->save();
+                }
+            }
+            Session::flash('success_message', 'Product Attribute Has Been Added Successfully');
+            return redirect()->back();
+        }
+
+        $productDetails = Product::with('attributes')->where(['id' => $id])->first();
+        return view('admin.product.addAttribute',compact('product','productDetails'));
+    }
+    public function deleteProductAttribute($id)
+    {
+        $productAttribute= ProductAttribute::findorFail($id);
+        $productAttribute->delete();
+        Session::flash('success_message', 'Product Attribute Has Been deleted Successfully');
+        return redirect()->back();
     }
 }

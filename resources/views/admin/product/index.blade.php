@@ -69,7 +69,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-info btn-sm">
+                                                <a href="{{route('addAttributes',$product->id)}}" class="btn btn-info btn-sm">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
                                                 <a href="{{route('editProduct',  $product->id)}}">
