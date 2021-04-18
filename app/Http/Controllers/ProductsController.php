@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\ProductAttribute;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -229,6 +230,18 @@ class ProductsController extends Controller
 
             foreach($data['sku'] as $key => $val){
                 if(!empty($val)){
+                    //checking duplicate SKU
+                    $attrCountSKU = ProductAttribute::where('sku',$val)->count();
+                    if($attrCountSKU>0)
+                    {
+                        return redirect()->back()->with('error_message','Product SKU already exists in our database');
+                    }
+                    //checking duplicate size
+                    $attrCountSize= ProductAttribute::where(['product_id'=>$id , 'size'=>$data['size'][$key]])->count();
+                    if($attrCountSize>0)
+                    {
+                        return redirect()->back()->with('error_message','Product Size already exists in our database');
+                    }
                     $attribute = new ProductAttribute();
                     $attribute->product_id = $data['product_id'];
                     $attribute->sku = $val;
@@ -245,6 +258,7 @@ class ProductsController extends Controller
         $productDetails = Product::with('attributes')->where(['id' => $id])->first();
         return view('admin.product.addAttribute',compact('product','productDetails'));
     }
+    //delete product attribute
     public function deleteProductAttribute($id)
     {
         $productAttribute= ProductAttribute::findorFail($id);
@@ -252,4 +266,57 @@ class ProductsController extends Controller
         Session::flash('success_message', 'Product Attribute Has Been deleted Successfully');
         return redirect()->back();
     }
+    //update product attribute
+    public function editAttributes(Request $request, $id=null)
+    {
+        if($request->isMethod('post'))
+        {
+            $data = $request->all();
+            foreach($data['idAttr'] as $key=>$attr)
+            {
+               ProductAttribute::where('id',$data['idAttr'][$key])->update(['price' => $data['price'][$key],'size' => $data['size'][$key], 'stock' => $data['stock'][$key],'sku' => $data['sku'][$key]]);
+            }
+            Session::flash('success_message', 'Product Attribute Has Been updated Successfully');
+            return redirect()->back();
+        }
+
+    }
+    public function addAltImage(Request  $request, $id){
+        $product = Product::findOrFail($id);
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if($request->hasFile('image')){
+                $files = $request->file('image');
+                foreach ($files as $file){
+                    $image = new ProductImage();
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = rand(11,99999).'.'.$extension;
+                    $image_path = 'public/uploads/product/' . $filename;
+                    Image::make($file)->save($image_path);
+                    $image->image = $filename;
+                    $image->product_id = $data['product_id'];
+                    $image->save();
+                }
+            }
+            Session::flash('success_message', 'Product Image Has Been Added Successfully');
+            return redirect()->back();
+        }
+        $productImages = ProductImage::where('product_id', $id)->get();
+        return view ('admin.product.addAltImage', compact('product','productImages'));
+    }
+    public function deleteProductImage($id){
+        $image = ProductImage::findOrFail($id);
+        $image->delete();
+        $image_path = 'public/uploads/product/';
+        if(!empty($image->image)){
+            if(file_exists($image_path.$image->image)){
+                unlink($image_path.$image->image);
+            }
+        }
+        Session::flash('success_message', 'Product Image Has Been deleted Successfully');
+        return redirect()->back();
+    }
+
+
+
 }

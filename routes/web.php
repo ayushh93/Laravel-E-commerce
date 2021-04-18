@@ -56,7 +56,10 @@ Route::prefix('/admin')->group(function(){
         Route::get('/delete-product/{id}','ProductsController@deleteProduct')->name('deleteProduct');
         Route::post('/update-product-status','ProductsController@updateProductStatus')->name('updateProductStatus');
         Route::match(['get','post'],'/add-product-attribute/{id}','ProductsController@addAttributes')->name('addAttributes');
+        Route::match(['get','post'],'/add-product-image/{id}','ProductsController@addAltImage')->name('addAltImage');
         Route::get('delete-attribute/{id}','ProductsController@deleteProductAttribute')->name('deleteProductAttribute');
+        Route::get('delete-image/{id}','ProductsController@deleteProductImage')->name('deleteProductImage');
+        Route::post('update-product-attribute/{id}','ProductsController@deleteProductImage')->name('deleteProductImage');
     });
 });
 Route::post('/ckeditor','CkeditorFileUploadController@store')->name('ckeditor.upload');

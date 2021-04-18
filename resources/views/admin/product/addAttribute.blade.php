@@ -80,6 +80,8 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
+                                <form action="{{url('/admin/update-product-attribute/{id}'.$productDetails->id)}}" method="post">
+                                    @csrf
                                 <table class="datatable table table-stripped mb-0">
                                     <thead>
                                     <tr>
@@ -94,12 +96,13 @@
                                     <tbody>
                                     @foreach($productDetails['attributes'] as $attribute)
                                         <tr>
-                                            <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $attribute->sku }}</td>
-                                            <td>{{ $attribute->size }}</td>
-                                            <td>{{ $attribute->price }}</td>
-                                            <td>{{ $attribute->stock }}</td>
+                                            <td><input type="hidden" name="idAttr[]" value=""{{$attribute->id}}"> {{ $loop->index + 1 }}</td>
+                                            <td> <input type="text" name="sku[]" value="{{ $attribute->sku }}" class="form-control"> </td>
+                                            <td> <input type="text" name="size[]" value="{{ $attribute->size }}" class="form-control"> </td>
+                                            <td> <input type="text" name="price[]" value="{{ $attribute->price }}" class="form-control"> </td>
+                                            <td> <input type="text" name="stock[]" value="{{ $attribute->stock }}" class="form-control"> </td>
                                             <td>
+                                                <input type="submit" class="btn btn-sm btn-info" value="Update">
                                                 <a class="btn btn-danger btn-sm deleteRecord" style="color: white" href="javascript:" rel="{{ $attribute->id }}" rel1="delete-attribute">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
@@ -109,6 +112,7 @@
 
                                     </tbody>
                                 </table>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -72,6 +72,9 @@
                                                 <a href="{{route('addAttributes',$product->id)}}" class="btn btn-info btn-sm">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
+                                                <a href="{{route('addAltImage',$product->id)}}" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
                                                 <a href="{{route('editProduct',  $product->id)}}">
                                                     <button class="btn btn-success btn-sm">
                                                         <i class="fa fa-pencil"></i>
