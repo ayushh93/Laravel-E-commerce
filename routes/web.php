@@ -60,6 +60,15 @@ Route::prefix('/admin')->group(function(){
         Route::get('delete-attribute/{id}','ProductsController@deleteProductAttribute')->name('deleteProductAttribute');
         Route::get('delete-image/{id}','ProductsController@deleteProductImage')->name('deleteProductImage');
         Route::post('update-product-attribute/{id}','ProductsController@deleteProductImage')->name('deleteProductImage');
+
+        //testimonial
+        Route::get('/testimonial', 'TestimonialController@testimonial')->name('testimonial.index');
+        Route::get('/testimonial/add', 'TestimonialController@addTestimonial')->name('testimonial.add');
+        Route::post('/testimonial/store', 'TestimonialController@storeTestimonial')->name('testimonial.store');
+        Route::get('/testimonial/edit/{id}', 'TestimonialController@editTestimonial')->name('testimonial.edit');
+        Route::post('/testimonial/update/{id}', 'TestimonialController@updateTestimonial')->name('testimonial.update');
+        Route::get('/delete-testimonial/{id}', 'TestimonialController@delete')->name('testimonial.delete');
+
     });
 });
 Route::post('/ckeditor','CkeditorFileUploadController@store')->name('ckeditor.upload');
